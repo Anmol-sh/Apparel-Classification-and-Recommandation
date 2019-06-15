@@ -1,0 +1,14 @@
+dataFile = 'Data'
+trainFile = 'train'
+validationFile = 'validation'
+splitRatio = 0.6
+top_model_weights_path = 'bottleneck_fc_model.h5'
+epochs = 15
+batchSize = 20
+trainFeature = 'bottleneck_features_train.npy'
+validationFeature = 'bottleneck_features_validation.npy'
+classIndex = 'class_indices.npy'
+indexDir = 'index'
+queryImage = ''
+resultDir = 'result'
+confMatFile = "confMat.json"
