@@ -12,14 +12,11 @@ def search_sample():
 	category = predict(query_image)
 	indexFile = config.indexDir + '/' + category + '.csv'
 	catFile = config.dataFile + '/' + category
-	# args={'index':"Data/index/women_tops.csv",
-	# 	"query":"send.jpg",
-	# 	"result_path":"Data/women_tops"}
+	
 	cd = Region_Based((8, 12, 3))      #initialize the image descriptor. Here we specify the number of bins for hue, saturation and value.
 
 	# load the query image and describe it
 	query = cv2.imread(query_image)
-	#grey_query=cv2.cvtColor(query, cv2.COLOR_BGR2GRAY)
 	features = cd.describe(query)
 
 
@@ -27,10 +24,6 @@ def search_sample():
 	# perform the search
 	results = searcher.search(features)
 
-	# cv2.imshow("Query", query)     # display the query
-	# #cv2.imshow("Greyscale version of the query",grey_query)
-	# cv2.waitKey(0)
-	# loop over the results
 	i=0
 	print("Got results")
 	rmtree(config.resultDir)
@@ -38,7 +31,7 @@ def search_sample():
 	for (score, resultID) in results:
 		print(catFile + "/" + resultID)     # load the result image and display it
 		copy2(catFile + "/" + resultID, config.resultDir)
-		# cv2.imshow("Results", result)
-		# print(results[i])
 		i=i+1
-		# cv2.waitKey(0)
+
+if __name__=='__main__':
+    search_sample()

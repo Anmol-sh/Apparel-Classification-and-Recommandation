@@ -11,4 +11,4 @@ classIndex = 'class_indices.npy'
 indexDir = 'index'
 queryImage = ''
 resultDir = 'result'
-confMatFile = "confMat.json"
+confMatFile = "confMat.csv"
