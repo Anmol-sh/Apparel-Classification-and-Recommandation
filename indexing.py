@@ -30,3 +30,5 @@ def index_files():
 
         output.close()         # close the index file
 
+if __name__=='__main__':
+    index_files()

@@ -15,7 +15,7 @@ def predict(image_path):
     # image_path = 'data/validation/women_tops/1424.jpg'
 
     orig = cv2.imread(image_path)
-    print("classification of ",image_path)
+    #print("classification of ",image_path)
     image = load_img(image_path, target_size=(224, 224))
     image = img_to_array(image)
 
@@ -46,5 +46,5 @@ def predict(image_path):
     label = inv_map[inID]
 
     # get the prediction label
-    print("Class/Category: {}".format(label))
+    #print("Class/Category: {}".format(label))
     return label

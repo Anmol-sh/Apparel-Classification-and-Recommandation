@@ -27,3 +27,7 @@ def split_data_set():
             copy2(join(join(config.dataFile,category),im), join(config.trainFile,category))
         for im in validationImages:
             copy2(join(join(config.dataFile,category),im), join(config.validationFile,category))
+    print("Done")
+
+if __name__=='__main__':
+    split_data_set()

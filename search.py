@@ -42,3 +42,6 @@ def search_sample():
 		# print(results[i])
 		i=i+1
 		# cv2.waitKey(0)
+
+if __name__=='__main__':
+    search_sample()
