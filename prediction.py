@@ -23,10 +23,10 @@ def predict(image_path):
     image = image / 255
     image = np.expand_dims(image, axis=0)
 
-    # build the VGG16 network
-    model = applications.VGG16(include_top=False, weights='imagenet')
+    # build the VGG19 network
+    model = applications.VGG19(include_top=False, weights='imagenet')
 
-    # get the bottleneck prediction from the pre-trained VGG16 model
+    # get the bottleneck prediction from the pre-trained VGG19 model
     bottleneck_prediction = model.predict(image)
 
     # build top model
