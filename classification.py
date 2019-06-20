@@ -18,6 +18,8 @@ import matplotlib.pyplot as plt
 import math
 import cv2
 import config
+from shutil import copyfile, rmtree, copytree     #################
+from os import remove, path                       #################
 
 # dimensions of our images.
 img_width, img_height = 224, 224
@@ -163,6 +165,32 @@ def train_top_model():
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
     plt.show()
+
+    ans = input("would you like to save the bottleneck features?(y/n)")              ###############
+    if ans=='y':
+        print("saving files")
+        remove('backup/'+config.top_model_weights_path)
+        copyfile(config.top_model_weights_path, 'backup/'+config.top_model_weights_path)
+
+        remove('backup/'+config.trainFeature)
+        copyfile(config.trainFeature, 'backup/'+config.trainFeature)
+
+        remove('backup/'+config.validationFeature)
+        copyfile(config.validationFeature, 'backup/'+config.validationFeature)
+
+        remove('backup/'+config.classIndex)
+        copyfile(config.classIndex, 'backup/'+config.classIndex)
+
+        rmtree('backup/' + config.trainFile)
+        copytree(config.trainFile, 'backup/' + config.trainFile)
+
+        rmtree('backup/' + config.validationFile)
+        copytree(config.validationFile, 'backup/' + config.validationFile)
+
+        plot = input("Filename:- ")
+        if path.exists(plot):
+            remove(plot)
+        plt.savefig('foo.png')
 
 def train_model():
     save_bottlebeck_features()
