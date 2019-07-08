@@ -18,8 +18,6 @@ import matplotlib.pyplot as plt
 import math
 import cv2
 import config
-from shutil import copyfile, rmtree, copytree     #################
-from os import remove, path                       #################
 
 # dimensions of our images.
 img_width, img_height = 224, 224
@@ -36,8 +34,8 @@ batch_size = config.batchSize
 
 def save_bottlebeck_features():
     print("In save_bottlebeck_features")
-    # build the VGG16 network
-    model = applications.VGG16(include_top=False, weights='imagenet')
+    # build the Inception network
+    model = applications.InceptionV3(include_top=False, weights='imagenet')
 
     datagen = ImageDataGenerator(rescale=1. / 255)
 
@@ -166,35 +164,31 @@ def train_top_model():
     plt.legend(['train', 'test'], loc='upper left')
     plt.show()
 
-    ans = input("would you like to save the bottleneck features?(y/n)")              ###############
-    if ans=='y':
-        print("saving files")
-        remove('backup/'+config.top_model_weights_path)
-        copyfile(config.top_model_weights_path, 'backup/'+config.top_model_weights_path)
-
-        remove('backup/'+config.trainFeature)
-        copyfile(config.trainFeature, 'backup/'+config.trainFeature)
-
-        remove('backup/'+config.validationFeature)
-        copyfile(config.validationFeature, 'backup/'+config.validationFeature)
-
-        remove('backup/'+config.classIndex)
-        copyfile(config.classIndex, 'backup/'+config.classIndex)
-
-        rmtree('backup/' + config.trainFile)
-        copytree(config.trainFile, 'backup/' + config.trainFile)
-
-        rmtree('backup/' + config.validationFile)
-        copytree(config.validationFile, 'backup/' + config.validationFile)
-
-        plot = input("Filename:- ")
-        if path.exists(plot):
-            remove(plot)
+    ans = input("would you like to save the bottleneck features?(y/n)")  
+    if ans=='y': 
+        print("saving files") 
+        remove('backup/'+config.top_model_weights_path) 
+        copyfile(config.top_model_weights_path, 'backup/'+config.top_model_weights_path)     
+        remove('backup/'+config.trainFeature) 
+        copyfile(config.trainFeature, 'backup/'+config.trainFeature) 
+        remove('backup/'+config.validationFeature) 
+        copyfile(config.validationFeature, 'backup/'+config.validationFeature) 
+        remove('backup/'+config.classIndex) 
+        copyfile(config.classIndex, 'backup/'+config.classIndex) 
+        rmtree('backup/' + config.trainFile) 
+        copytree(config.trainFile, 'backup/' + config.trainFile) 
+        rmtree('backup/' + config.validationFile) 
+        copytree(config.validationFile, 'backup/' + config.validationFile) 
+        plot = input("Filename:- ") 
+        if path.exists(plot): 
+            remove(plot) 
         plt.savefig('foo.png')
-
 def train_model():
     save_bottlebeck_features()
     train_top_model()
+    
+if __name__=='__main__': 
+    train_model()    
 
-if __name__=='__main__':
-    train_model()
+
+
