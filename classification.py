@@ -191,6 +191,25 @@ def train_top_model():
         if path.exists(plot):
             remove(plot)
         plt.savefig('foo.png')
+    else:
+        print("recovering files")
+        remove(config.top_model_weights_path)
+        copyfile('backup/'+config.top_model_weights_path, config.top_model_weights_path)
+
+        remove(config.trainFeature)
+        copyfile('backup/'+config.trainFeature, config.trainFeature)
+
+        remove(config.validationFeature)
+        copyfile('backup/'+config.validationFeature, config.validationFeature)
+
+        remove(config.classIndex)
+        copyfile('backup/'+config.classIndex, config.classIndex)
+
+        rmtree(config.trainFile)
+        copytree('backup/'+config.trainFile, config.trainFile)
+
+        rmtree(config.validationFile)
+        copytree('backup/'+config.validationFile, config.validationFile)
 
 def train_model():
     save_bottlebeck_features()
